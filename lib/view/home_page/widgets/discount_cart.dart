@@ -126,7 +126,7 @@ class _DiscountCardState extends State<DiscountCard> {
                   child: Column(
                     children: <Widget>[
                       Image.asset(
-                        "assets/main/message.jpg",
+                        "assets/main/message.png",
                         width: 64.0,
                       ),
                       SizedBox(

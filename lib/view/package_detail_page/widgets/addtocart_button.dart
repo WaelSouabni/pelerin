@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:pelerin/view/register_page/register_page_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../home_page/components/colors.dart';
 import '../../home_page/components/size_config.dart';
@@ -67,43 +68,9 @@ class AddToCartButton extends StatelessWidget {
   }
   
    _Registre(context) async {
-       SharedPreferences sharedPreferences  = await SharedPreferences.getInstance();
 
-    //  print(password);
-    final response = await http.post(
-      Uri.parse(sharedPreferences.getString("url")!+'/accompgnateursPackages'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(<String, dynamic>{
-        "user_id": sharedPreferences.getInt("idUser"),
-        "package_id":sharedPreferences.getInt("idPackage"),
-        "role": "0"
-      }),
-    );
-        
-if (response.statusCode == 200) {
-       print("ffff");
-      //
-       Future.delayed(Duration.zero, () => showAlert(context));
-       Navigator.pop(context);
-
-}
+                     Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => const RegisterPageView()));
    }
-        void showAlert(BuildContext context) {
-    showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-              content: Text("تم تسجيلك بنجاح"),
-              actions: <Widget>[
-                // usually buttons at the bottom of the dialog
-                new FlatButton(
-                  child: new Text("غلق"),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            ));
-  }
+
 }

@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:date_field/date_field.dart';
 import 'package:flutter/material.dart';
+import 'package:pelerin/view/login_page/login_page_view.dart';
 import '../bottom_navigator.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
@@ -20,11 +22,34 @@ class RegisterPageView extends StatefulWidget {
 }
 
 class _RegisterPageViewState extends State<RegisterPageView> {
-  final TextEditingController passwordController = new TextEditingController();
-  final TextEditingController nameController = new TextEditingController();
-  final TextEditingController mailController = new TextEditingController();
+  final TextEditingController phoneController = new TextEditingController();
+  final TextEditingController NumeroPasseController = new TextEditingController();
+  DateTime? selectedDateEmmesion;
+  DateTime? selectedDateExperation;
 
-  bool passwordObscure = true;
+
+
+   late SharedPreferences sharedPreferences;
+
+  //
+  String labelle = "";
+
+   checkLoginStatus() async {
+    sharedPreferences = await SharedPreferences.getInstance();
+    if(sharedPreferences.getString("token") == null) {
+          Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => const LoginPageView()));    }
+          
+    setState(() {
+      labelle = sharedPreferences.getString("labellePackage")!;
+    });
+
+  }
+   @override
+  void initState() {
+    checkLoginStatus();  
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,10 +58,10 @@ class _RegisterPageViewState extends State<RegisterPageView> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                BackgroundImage(),
+                BackgroundImage(labelle:  labelle),
                 RegisterTextField(),
                 RegisterButton(),
-                TextSignIn()
+
               ],
             ),
           ),
@@ -50,15 +75,15 @@ class _RegisterPageViewState extends State<RegisterPageView> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-          TextFieldInputusername(),
-          TextFieldInputemail(),
-          TextFieldPassword(),
-          TextFieldPassword(),
+                 phoneTextField(),
+                 numeroPassTextField(),
+                 dateEmessionTextField(),
+                 dateExperationTextField(),
         ]));
   }
 
-  //
-  TextFieldInputusername() {
+    //nomTextField
+  numeroPassTextField() {
     SizeConfig().init(context);
     return Center(
       child: Padding(
@@ -70,7 +95,11 @@ class _RegisterPageViewState extends State<RegisterPageView> {
         child: TextField(
           style: TextStyle(color: textColor),
           cursorColor: textColor,
-          controller: nameController,
+          controller: NumeroPasseController,
+          onChanged: (text) {
+                //print("Text $text");
+                  sharedPreferences.setString("numeroPassport", text);
+              },
           decoration: InputDecoration(
               prefixIcon: Icon(Icons.account_circle),
               focusedBorder: OutlineInputBorder(
@@ -87,17 +116,17 @@ class _RegisterPageViewState extends State<RegisterPageView> {
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20.0),
               ),
-              hintText: 'اسم االمستخدم',
+              hintText: 'رقم جواز السفر',
               hintStyle: TextStyle(color: texthint.withOpacity(0.3)),
-              labelText: 'اسم االمستخدم',
+              labelText:  'رقم جواز السفر',
               labelStyle: TextStyle(color: texthint.withOpacity(0.6))),
         ),
       ),
     );
   }
-
-  //
-  TextFieldInputemail() {
+         
+  //dateEmessionTextField
+  dateEmessionTextField() {
     SizeConfig().init(context);
     return Center(
       child: Padding(
@@ -106,37 +135,21 @@ class _RegisterPageViewState extends State<RegisterPageView> {
             SizeConfig.screenHeight! / 68.3,
             SizeConfig.screenWidth! / 20.55,
             SizeConfig.screenHeight! / 34.15),
-        child: TextField(
-          style: TextStyle(color: textColor),
-          cursorColor: textColor,
-          controller: mailController,
-          decoration: InputDecoration(
-              prefixIcon: Icon(Icons.mail),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                borderSide: BorderSide(
-                    width: SizeConfig.screenWidth! / 205.5, color: textColor),
-
-                /// 2
-              ),
-              enabledBorder: UnderlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                borderSide: BorderSide(width: 1, color: texthint),
-              ),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(20.0),
-              ),
-              hintText: 'البريد الالكتروني',
-              hintStyle: TextStyle(color: texthint.withOpacity(0.3)),
-              labelText: 'البريد الالكتروني',
-              labelStyle: TextStyle(color: texthint.withOpacity(0.6))),
-        ),
+        child: DateTimeField(
+            decoration: const InputDecoration(hintText: 'تاريخ استخراج جواز السفر'),
+            selectedDate: selectedDateEmmesion,
+            onDateSelected: (DateTime value) {
+              setState(() {
+                selectedDateEmmesion = value;
+              });
+               sharedPreferences.setString("dateEmession", value.toString());
+            }),
       ),
     );
   }
 
-  //
-  TextFieldPassword() {
+  // dateExperationTextField()
+  dateExperationTextField() {
     SizeConfig().init(context);
     return Center(
       child: Padding(
@@ -145,41 +158,15 @@ class _RegisterPageViewState extends State<RegisterPageView> {
             SizeConfig.screenHeight! / 68.3,
             SizeConfig.screenWidth! / 20.55,
             SizeConfig.screenHeight! / 34.15),
-        child: TextField(
-          obscureText: passwordObscure,
-          style: TextStyle(color: textColor),
-          controller: passwordController,
-          cursorColor: textColor,
-          decoration: InputDecoration(
-              prefixIcon: Icon(Icons.vpn_key),
-              suffixIcon: IconButton(
-                onPressed: () {
-                  setState(() {
-                    passwordObscure = !passwordObscure;
-                  });
-                },
-                icon: Icon(
-                    passwordObscure ? Icons.visibility_off : Icons.visibility),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                borderSide: BorderSide(
-                    width: SizeConfig.screenWidth! / 205.5, color: textColor),
-
-                /// 2
-              ),
-              enabledBorder: UnderlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                borderSide: BorderSide(width: 1, color: texthint),
-              ),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(20.0),
-              ),
-              hintText: "كلمة السر",
-              hintStyle: TextStyle(color: texthint.withOpacity(0.3)),
-              labelText: "كلمة السر",
-              labelStyle: TextStyle(color: texthint.withOpacity(0.6))),
-        ),
+        child: DateTimeField(
+            decoration: const InputDecoration(hintText: 'تاريخ انتاء صلاحية جواز السفر'),
+            selectedDate: selectedDateExperation,
+            onDateSelected: (DateTime value) {
+              setState(() {
+                selectedDateExperation = value;
+              });
+              sharedPreferences.setString("expiration", value.toString());
+            }),
       ),
     );
   }
@@ -220,9 +207,9 @@ class _RegisterPageViewState extends State<RegisterPageView> {
           onPressed: () {
            // Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPageView()));
                _Registre(
-                                    nameController.text,
-                                    mailController.text,
-                                    passwordController.text);
+                                    phoneController.text,
+                                    NumeroPasseController.text,
+                                   );
           },
           child: Text(
             "اشتراك",
@@ -233,44 +220,116 @@ class _RegisterPageViewState extends State<RegisterPageView> {
     );
   }
   //
+  //phoneController ||
+  phoneTextField() {
+    SizeConfig().init(context);
+    return Center(
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(
+            SizeConfig.screenWidth! / 20.55,
+            SizeConfig.screenHeight! / 68.3,
+            SizeConfig.screenWidth! / 20.55,
+            SizeConfig.screenHeight! / 34.15),
+        child: TextField(
+          style: TextStyle(color: textColor),
+          cursorColor: textColor,
+          controller: phoneController,
+          onChanged: (text) {
+            //print("Text $text");
+            sharedPreferences.setString("phone", text);
+          },
+          decoration: InputDecoration(
+              prefixIcon: Icon(Icons.phone),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                borderSide: BorderSide(
+                    width: SizeConfig.screenWidth! / 205.5, color: textColor),
+
+                /// 2
+              ),
+              enabledBorder: UnderlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                borderSide: BorderSide(width: 1, color: texthint),
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+              hintText: 'رقم الهاتف',
+              hintStyle: TextStyle(color: texthint.withOpacity(0.3)),
+              labelText: 'رقم الهاتف',
+              labelStyle: TextStyle(color: texthint.withOpacity(0.6))),
+        ),
+      ),
+    );
+  }
+
+ 
   //registre
 
-  Future<void> _Registre(String name, String mail, String password) async {
+  Future<void> _Registre(String phone, String numpassport) async {
     //After successful login we will redirect to profile page. Let's create profile page now
   SharedPreferences sharedPreferences  = await SharedPreferences.getInstance();
     final response = await http.post(
-      Uri.parse(sharedPreferences.getString("url")!+'/Mobile/register'),
+      Uri.parse(sharedPreferences.getString("url")!+'/Mobile/PelerinUpdat'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
-      body: jsonEncode(<String, String>{
-        'name': name,
-        'email': mail,
-        'password': password,
+      body: jsonEncode(<String, dynamic>{
+       'telephoneTunisien': phone,
+        'numeroDePassport': numpassport,
+        'dateExpiration': sharedPreferences.getString("expiration")!,
+        'dateEmission': sharedPreferences.getString("dateEmession")!,
+        'package_id':  (sharedPreferences.getInt("idPackage")!),
+        'user_id':  (sharedPreferences.getInt("idUser")!),
+
       }),
     );
     print(response.body.length);
     var datauser = json.decode(response.body);
     // print(datauser["success"]);
     if (datauser["success"]) {
-      User userdata = User.fromJson(datauser["user"]);
-      // print(datauser);
-      SharedPreferences sharedPreferences =
-          await SharedPreferences.getInstance();
-
-      sharedPreferences.setString("token", 'True');
-      sharedPreferences.setInt("idUser", userdata.id);
-      sharedPreferences.setString("userName", userdata.name);
-      sharedPreferences.setString("userMail", userdata.email);
-    
-
-     /* Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => MyHomePage()));*/
+      Future.delayed(Duration.zero, () => showAlert(context));
         Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => MyHomePage()));
+
     } else {
+        Future.delayed(Duration.zero, () => showAlertErr(context));
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => RegisterPageView()));
     }
+  }
+     
+          void showAlert(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              content: Text("تم تسجيلك بنجاح"),
+              actions: <Widget>[
+                // usually buttons at the bottom of the dialog
+                new FlatButton(
+                  child: new Text("غلق"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ));
+  }
+  /// 
+  void showAlertErr(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              content: Text("حدث خطأ أعد المحاولة مرة أخرى أو اترك رسالة "),
+              actions: <Widget>[
+                // usually buttons at the bottom of the dialog
+                new FlatButton(
+                  child: new Text("أعد المحاولة"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ));
   }
 }
