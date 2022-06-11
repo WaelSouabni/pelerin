@@ -52,7 +52,7 @@ class AddToCartButton extends StatelessWidget {
                 ),
               ),
               Text(
-                "اشتراك شخصي كمعتمر",
+                "اشتراك",
                 style: TextStyle(
                   fontSize: SizeConfig.screenHeight! / 34.15,
                   fontWeight: FontWeight.w700,
