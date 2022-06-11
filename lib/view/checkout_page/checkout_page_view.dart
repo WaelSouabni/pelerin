@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:pelerin/view/bottom_navigator.dart';
 import 'package:pelerin/view/checkout_page/widgets/address.dart';
 import 'package:pelerin/view/checkout_page/widgets/payment.dart';
-import 'package:pelerin/view/login_page/login_page_view.dart';
+
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -28,18 +28,9 @@ class _CheckoutPageViewState extends State<CheckoutPageView> {
   late SharedPreferences sharedPreferences;
 
   //
-   checkLoginStatus() async {
-    sharedPreferences = await SharedPreferences.getInstance();
-    if(sharedPreferences.getString("token") == null) {
-          Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const LoginPageView()));    }
-          
  
-
-  }
    @override
   void initState() {
-    checkLoginStatus();  
     super.initState();
   }
 
