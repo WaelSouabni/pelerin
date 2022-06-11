@@ -17,7 +17,7 @@ class PackageDetailView extends StatefulWidget {
   int NombrePlaceRestant;
   DateTime dateDepart;
   String? image;
-  int NombreAccRestant;
+  
   PackageDetailView({
     required this.id,
     required this.labelle,
@@ -27,7 +27,7 @@ class PackageDetailView extends StatefulWidget {
     required this.dateDepart,
     required this.prix,
     required this.image,
-    required this.NombreAccRestant,
+    
   });
 
   @override
@@ -69,7 +69,7 @@ class _PackageDetailViewState extends State<PackageDetailView> {
                 NombrePlace: widget.NombrePlace,
                 dateDepart: widget.dateDepart,
                 NombrePlaceRestant: widget.NombrePlaceRestant,
-                NombreAccRestant:widget.NombreAccRestant),
+                ),
           ],
         ),
       ),

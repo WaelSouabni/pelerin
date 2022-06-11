@@ -217,11 +217,11 @@ class _CheckoutPageViewState extends State<CheckoutPageView> {
         'nomArabe': sharedPreferences.getString("nomarabe")!,
         'prenomArabe': sharedPreferences.getString("prenomarabe")!,
         'sexe': sharedPreferences.getString("sexe")!,
-        'telephoneTunisien': sharedPreferences.getString("phone")!,
-        'user_id':  (sharedPreferences.getString("dateNaissance")!),
+        'dateNaissance':  (sharedPreferences.getString("dateNaissance")!),
         'user_id':  (sharedPreferences.getInt("idUser")!),
         'etat': '0',
       }),
+     
     );
         Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => MyHomePage()));

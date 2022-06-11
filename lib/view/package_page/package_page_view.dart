@@ -93,8 +93,7 @@ class _PackagePageViewState extends State<PackagePageView> {
                                     NombrePlace: Package.NombrePlace,
                                     NombrePlaceRestant: Package.NombrePlaceRestant,
                                     dateDepart: Package.dateDepart,
-                                    NombreAccRestant: Package.NombreAccRestant,
-                                  ),
+                                    ),
                                                                     IconButton(
                                 icon: const Icon(Icons.calendar_month),
                                 onPressed: () {

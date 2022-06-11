@@ -7,7 +7,6 @@ class Package {
   int prix;
   DateTime dateDepart;
   String? image;
-  int NombreAccRestant;
 
   Package({
     required this.id,
@@ -18,7 +17,6 @@ class Package {
     required this.prix,
     required this.dateDepart,
     required this.image,
-    required this.NombreAccRestant,
   });
 
   factory Package.fromJson(Map<String, dynamic> fichierJson) {
@@ -31,7 +29,6 @@ class Package {
       prix: fichierJson['prix'],
       image: fichierJson["image"].toString(),
       dateDepart: DateTime.parse(fichierJson['dateDepart']),
-      NombreAccRestant: fichierJson['NombreAccRestant'],
     );
   }
 }

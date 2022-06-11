@@ -13,7 +13,7 @@ class DetailWidget extends StatefulWidget {
   int NombrePlace;
   DateTime dateDepart;
   int NombrePlaceRestant;
-  int NombreAccRestant;
+ 
 
   DetailWidget({
     required this.labelle,
@@ -22,7 +22,7 @@ class DetailWidget extends StatefulWidget {
     required this.dateDepart,
     required this.prix,
     required this.NombrePlaceRestant,
-    required this.NombreAccRestant,
+   
   });
   @override
   _DetailWidgetState createState() => _DetailWidgetState();

@@ -11,7 +11,7 @@ Future<List<Package>> bringThePackages() async {
   SharedPreferences sharedPreferences  = await SharedPreferences.getInstance();
 
   var response = await http.get(
-    Uri.parse(sharedPreferences.getString("url")!+'/Mobile/volaccom'),
+    Uri.parse(sharedPreferences.getString("url")!+'/Mobile/vol'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
       'Access-Control-Allow-Origin': '*',
