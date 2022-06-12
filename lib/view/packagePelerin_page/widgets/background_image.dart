@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+
 import '../../home_page/components/size_config.dart';
 import '../../login_page/widgets/text_title.dart';
 
+
 class BackgroundImage extends StatelessWidget {
-  const BackgroundImage({Key? key}) : super(key: key);
+   BackgroundImage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +14,7 @@ class BackgroundImage extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Container(
-            height: SizeConfig.screenHeight!/6.5,    /// 160.0
+            height: SizeConfig.screenHeight!/6.5,    /// 160.0 4.268
             decoration: BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage('assets/main/background_image.png'),
@@ -24,7 +26,7 @@ class BackgroundImage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Center(
-                  child: TextTitle(title: " ترك رسالة"),
+                  child: TextTitle(title: "قائمة الرحلات التي اشتركتم فيها "),
                 ),
               ],
             ),

@@ -60,7 +60,7 @@ class _UserNameTextState extends State<UserNameText> {
                 children: [
                   Padding(
                     padding: EdgeInsets.only(top: SizeConfig.screenHeight!/85.38 ,bottom: SizeConfig.screenHeight!/113.84),          /// 8.0 - 6.0
-                    child: Text(name+" مرحبا ", style: TextStyle(fontSize: SizeConfig.screenHeight!/29.7, fontWeight: FontWeight.bold, color: Colors.black87),),  /// 23
+                    child: Text(name+" مرحبا ", style: TextStyle(fontSize: SizeConfig.screenHeight!/29.7, fontWeight: FontWeight.bold, color: Colors.white),),  /// 23
                   ),
                   Padding(
                     padding: EdgeInsets.only(bottom: SizeConfig.screenHeight!/85.38),      /// 8.0
@@ -101,7 +101,7 @@ class _UserNameTextState extends State<UserNameText> {
               Positioned(
                 right: SizeConfig.screenWidth!/20.55,              /// 20.0
                 bottom: SizeConfig.screenHeight!/62.01,            /// 11.0
-                child: Text("x", style: TextStyle(color: Colors.black87, fontWeight: FontWeight.bold),)
+                child: Text("x", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),)
               )
             ],
           ),

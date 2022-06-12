@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:pelerin/view/home_page/widgets/background_image.dart';
 import 'package:pelerin/view/login_page/login_page_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -38,7 +39,8 @@ class _HomePageViewState extends State<HomePageView> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            UserNameText(),
+          BackgroundImage(),
+           
             DiscountCard(),
           ],
         ),

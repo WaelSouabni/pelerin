@@ -56,9 +56,9 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             child: CurvedNavigationBar(
               key: navigationKey,
-              color: Colors.black45,
-              backgroundColor: buttonColor,
-              buttonBackgroundColor: buttonColor,
+              color: lightColor,
+              backgroundColor: Colors.transparent,
+              buttonBackgroundColor: lightColor,
               height: SizeConfig.screenHeight!/11.39,               /// 60.0
               animationCurve: Curves.easeInOut,
               animationDuration: Duration(milliseconds: 400),

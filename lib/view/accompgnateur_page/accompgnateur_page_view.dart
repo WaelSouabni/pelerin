@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:pelerin/view/accompgnateur_page/widgets/background_image.dart';
 import 'package:pelerin/view/login_page/login_page_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -37,12 +38,13 @@ class _AccompgnateurPageViewState extends State<AccompgnateurPageView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        centerTitle: true,
-        elevation: 0,
-        title: Text("قائمة المرفقين",style: TextStyle(color: Colors.white),),
-      ),
-      body: Padding(
+     
+      body:SingleChildScrollView(
+        child: Column(
+          children: [
+          BackgroundImage(),
+           
+    Padding(
         padding: EdgeInsets.symmetric(
             horizontal: SizeConfig.screenWidth! / 20.0,
             vertical: SizeConfig.screenHeight! / 136.6),
@@ -55,6 +57,7 @@ class _AccompgnateurPageViewState extends State<AccompgnateurPageView> {
               if (snapshot.hasData) {
                 var AccompgnateurList = snapshot.data;
                 return GridView.builder(
+                    shrinkWrap: true,
                     itemCount: AccompgnateurList!.length,
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
@@ -137,6 +140,9 @@ class _AccompgnateurPageViewState extends State<AccompgnateurPageView> {
                 );
               }
             }),
+      ),
+          ],
+        ),
       ),
     );
   }

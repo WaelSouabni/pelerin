@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:pelerin/view/login_page/login_page_view.dart';
+import 'package:pelerin/view/package_page/widgets/background_image.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../configuration/package_list.dart';
 import '../../configuration/package.dart';
@@ -34,13 +35,14 @@ class _PackagePageViewState extends State<PackagePageView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-            backgroundColor: Colors.white,
-      appBar: AppBar(
-        centerTitle: true,
-        elevation: 0,
-        title: Text("قائمة الرحلات ",style: TextStyle(color: Colors.white),),
-      ),
-      body: Padding(
+           
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+          BackgroundImage(),
+           
+           Padding(
+        
         padding: EdgeInsets.symmetric(
             horizontal: SizeConfig.screenWidth! / 20.0,
             vertical: SizeConfig.screenHeight! / 136.6),
@@ -53,6 +55,7 @@ class _PackagePageViewState extends State<PackagePageView> {
               if (snapshot.hasData) {
                  var PackageList = snapshot.data;
                 return GridView.builder(
+                    shrinkWrap: true,
                     itemCount: PackageList!.length,
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
@@ -140,6 +143,9 @@ class _PackagePageViewState extends State<PackagePageView> {
                 );
               }
             }),
+      ),
+          ],
+        ),
       ),
     );
   }
