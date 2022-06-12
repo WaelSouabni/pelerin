@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pelerin/view/login_page/widgets/text_title.dart';
 import '../../home_page/components/colors.dart';
 import '../../home_page/components/size_config.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -45,6 +46,9 @@ class _TopCustomShapeState extends State<TopCustomShape> {
 
               /// 150.0
               color: buttonColor,
+               child:const Center(
+                  child: Text("قائمة الرحلات"),
+                ),
             ),
           ),
           Center(

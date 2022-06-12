@@ -5,8 +5,7 @@ import '../../login_page/widgets/text_title.dart';
 
 
 class BackgroundImage extends StatelessWidget {
-  String labelle;
-   BackgroundImage({Key? key, required this.labelle}) : super(key: key);
+   BackgroundImage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +26,7 @@ class BackgroundImage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Center(
-                  child: TextTitle(title: " اشتراك في "+": "+ labelle),
+                  child: Text("الاشتراك في تطيبيق معتمر ", style: TextStyle(color: Colors.white, fontSize: SizeConfig.screenHeight!/30, fontWeight: FontWeight.bold),)
                 ),
               ],
             ),

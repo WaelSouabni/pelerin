@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:pelerin/view/bottom_navigator.dart';
 import 'package:pelerin/view/checkout_page/widgets/address.dart';
+import 'package:pelerin/view/checkout_page/widgets/background_image.dart';
 import 'package:pelerin/view/checkout_page/widgets/payment.dart';
 
 
@@ -65,21 +66,13 @@ class _CheckoutPageViewState extends State<CheckoutPageView> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          centerTitle: true,
-          backgroundColor: Colors.white,
-          title: Text(
-            "  الاشتراك في تطيبيق مرافق معتمر ",
-            style: TextStyle(
-                color: buttonColor, fontSize: 22, fontWeight: FontWeight.bold),
-          ),
-          leading: IconButton(
-                  icon: const Icon(Icons.arrow_back, color: Color.fromARGB(255, 0, 0, 0)),
-                  onPressed: () => Navigator.of(context).pop(),
-                ), 
-          elevation: 0,
-        ),
-        body: isCompleted
+      
+        body: SingleChildScrollView(
+        child: Column(
+          children: [
+          BackgroundImage(),
+           
+isCompleted
             ? CheckCart()
             : Theme(
                 data: Theme.of(context).copyWith(
@@ -176,7 +169,10 @@ class _CheckoutPageViewState extends State<CheckoutPageView> {
                       ),
                     );
                   },
-                )));
+                ))
+          ],
+        ),
+      ),);
   }
 
   void ajouterPelerin() async {

@@ -7,7 +7,7 @@ class CustomShape extends CustomClipper<Path>{
     double height = size.height;
     double width = size.width;
     path.lineTo(0, height - 100);
-    path.quadraticBezierTo(width/2, height, width, height - 100);
+    path.quadraticBezierTo(width/2, height, width, height - 100);//height - 100
     path.lineTo(width, 0);
     path.close();
     return path;

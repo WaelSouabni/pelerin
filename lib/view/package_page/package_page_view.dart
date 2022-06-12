@@ -125,9 +125,7 @@ class _PackagePageViewState extends State<PackagePageView> {
                         size: SizeConfig.screenHeight! / 11.39,
                       )),
                       /// 60.0
-                     /* SizedBox(
-                        height: SizeConfig.screenHeight! / 34.15,
-                      ),*/
+                   
                       /// 20.0
                       Center(
                           child: Text(

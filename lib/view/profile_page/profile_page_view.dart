@@ -21,10 +21,16 @@ class _ProfilePageViewState extends State<ProfilePageView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
+     /* appBar: AppBar(
         centerTitle: true,
         elevation: 0,
         title: Text("الملف الشخصي",style: TextStyle(color: Colors.white),),
+      ),*/
+        appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 82, 147, 221),
+        title: Text("الملف الشخصي",style: TextStyle(color: Colors.white),),
+        centerTitle: true,
+        elevation: 0.0,
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,7 +38,7 @@ class _ProfilePageViewState extends State<ProfilePageView> {
           TopCustomShape(),
           SizedBox(height: SizeConfig.screenHeight!/34.15,),                              /// 20.0
           MessageSection(icon_name: Icons.message, section_text: " ترك رسالة"),
-          pelerinsSection(icon_name: Icons.shopping_basket, section_text: "قائمة المعتمرين التابعين اليك"),
+          pelerinsSection(icon_name: Icons.shopping_basket, section_text: "قائمة الاشتراكات القديمة"),
           SeDeconnecterSection(icon_name: Icons.close,section_text: "الخروج"),
         ],
       ),
@@ -80,10 +86,7 @@ class _ProfilePageViewState extends State<ProfilePageView> {
       ),
       child:GestureDetector(
               onTap: (){
-              // Add what you want to do on tap
-               /* Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const PelerinListWidget()));*/
-   
+         
               },
               child: Row(
                     children: [
