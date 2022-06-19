@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:pelerin/view/login_page/login_page_view.dart';
+import 'package:pelerin/view/password_page/password_page_view.dart';
 import 'package:pelerin/view/profile_page/widgets/top_custom_shape.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -39,12 +40,13 @@ class _ProfilePageViewState extends State<ProfilePageView> {
           SizedBox(height: SizeConfig.screenHeight!/34.15,),                              /// 20.0
           MessageSection(icon_name: Icons.message, section_text: " ترك رسالة"),
           pelerinsSection(icon_name: Icons.shopping_basket, section_text: "قائمة الاشتراكات القديمة"),
+          PasswordUpdatesSection(icon_name: Icons.edit, section_text: "تغيير كلمة السر"),
           SeDeconnecterSection(icon_name: Icons.close,section_text: "الخروج"),
         ],
       ),
     );
   }
-  
+  //
   MessageSection({required IconData icon_name, required String section_text}) {
      return Padding(
       padding: EdgeInsets.fromLTRB(
@@ -104,6 +106,37 @@ class _ProfilePageViewState extends State<ProfilePageView> {
 
 //
 
+//
+
+  PasswordUpdatesSection({required IconData icon_name, required String section_text}) {
+     return Padding(
+      padding: EdgeInsets.fromLTRB(
+          SizeConfig.screenWidth!/13.7,          /// 30.0
+          0,
+          SizeConfig.screenWidth!/27.4,          /// 15.0
+          SizeConfig.screenHeight!/34.15         /// 20.0
+      ),
+      child:GestureDetector(
+              onTap: (){
+           Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => PasswordPageView()));
+  
+              },
+              child: Row(
+                    children: [
+                      Icon(icon_name, color: Colors.black54,),
+                      SizedBox(width: SizeConfig.screenWidth!/41.1,),
+                      Text(section_text, style: TextStyle(color: Colors.black54, fontSize: SizeConfig.screenHeight!/42.68),),      /// 16
+                      Spacer(),
+                      Icon(Icons.keyboard_arrow_right, color: Colors.black45,size: SizeConfig.screenHeight!/21.34,)                /// 32
+                    ],
+                  ),
+            ),
+    );
+ 
+  }
+
+//
  SeDeconnecterSection({required IconData icon_name, required String section_text}) {
      return Padding(
       padding: EdgeInsets.fromLTRB(

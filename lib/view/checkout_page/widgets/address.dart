@@ -56,6 +56,21 @@ class _AddressState extends State<Address> {
 
   }
 
+  //
+    //
+String? validateEmail(String? value) {
+    String pattern =
+        r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]"
+        r"{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]"
+        r"{0,253}[a-zA-Z0-9])?)*$";
+    RegExp regex = RegExp(pattern);
+    if (value == null || value.isEmpty || !regex.hasMatch(value))
+      return 'الرجاء إدخال البريد الإلكتروني ';
+    else
+      return null;
+  }
+  //
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -80,7 +95,7 @@ class _AddressState extends State<Address> {
             SizeConfig.screenHeight! / 68.3,
             SizeConfig.screenWidth! / 20.55,
             SizeConfig.screenHeight! / 34.15),
-        child: TextField(
+        child: TextFormField(
           style: TextStyle(color: textColor),
           cursorColor: textColor,
           controller: nameController,
@@ -108,6 +123,12 @@ class _AddressState extends State<Address> {
               hintStyle: TextStyle(color: texthint.withOpacity(0.3)),
               labelText: ' اسم المستخدم ',
               labelStyle: TextStyle(color: texthint.withOpacity(0.6))),
+              validator: (value) {
+              if (value == null || value.isEmpty ||value.length < 8) {
+                return 'الرجاء إدخال اسم المستخدم';
+              }
+              return null;
+            },
         ),
       ),
     );
@@ -123,7 +144,7 @@ class _AddressState extends State<Address> {
             SizeConfig.screenHeight! / 68.3,
             SizeConfig.screenWidth! / 20.55,
             SizeConfig.screenHeight! / 34.15),
-        child: TextField(
+        child: TextFormField(
           style: TextStyle(color: textColor),
           cursorColor: textColor,
           controller: mailController,
@@ -151,6 +172,7 @@ class _AddressState extends State<Address> {
               hintStyle: TextStyle(color: texthint.withOpacity(0.3)),
               labelText: 'البريد الالكتروني',
               labelStyle: TextStyle(color: texthint.withOpacity(0.6))),
+              validator: (value)=>validateEmail(value),
         ),
       ),
     );
@@ -166,7 +188,7 @@ class _AddressState extends State<Address> {
             SizeConfig.screenHeight! / 68.3,
             SizeConfig.screenWidth! / 20.55,
             SizeConfig.screenHeight! / 34.15),
-        child:  TextField(
+        child:  TextFormField(
           obscureText: passwordObscure,
           style: TextStyle(color: textColor),
           controller: passwordController,
@@ -204,6 +226,12 @@ class _AddressState extends State<Address> {
               hintStyle: TextStyle(color: texthint.withOpacity(0.3)),
               labelText: "كلمة السر",
               labelStyle: TextStyle(color: texthint.withOpacity(0.6))),
+              validator: (value) {
+              if (value == null || value.isEmpty ||value.length < 8) {
+                return 'الرجاء إدخال كلمة السر';
+              }
+              return null;
+            },
         ),
       ),
     );

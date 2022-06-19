@@ -29,7 +29,7 @@ class TextSignUp extends StatelessWidget {
                 //Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterPageView()));
                  // Navigator.push(context, MaterialPageRoute(builder: (context) => CheckoutPageView()));
                   
-                     Navigator.pushReplacement(
+                     Navigator.push(
           context, MaterialPageRoute(builder: (context) => const CheckoutPageView()));
    
               },

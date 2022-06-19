@@ -23,12 +23,31 @@ class _LoginPageViewState extends State<LoginPageView> {
     final TextEditingController passwordController = new TextEditingController();
     late SharedPreferences sharedPreferences;
     bool passwordObscure = true;
+    final _formKey = GlobalKey<FormState>();
+
+    //
+String? validateEmail(String? value) {
+    String pattern =
+        r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]"
+        r"{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]"
+        r"{0,253}[a-zA-Z0-9])?)*$";
+    RegExp regex = RegExp(pattern);
+    if (value == null || value.isEmpty || !regex.hasMatch(value))
+      return 'الرجاء إدخال البريد الإلكتروني ';
+    else
+      return null;
+  }
+
+      //
+
+    //
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
-        child: SingleChildScrollView(
+        child: Form(//SingleChildScrollView
+          key: _formKey,
           child: Column(
             children: [
               LogoImage(),
@@ -68,7 +87,8 @@ class _LoginPageViewState extends State<LoginPageView> {
             SizeConfig.screenWidth!/20.55,
             SizeConfig.screenHeight!/34.15
         ),
-        child: TextField(
+        child: TextFormField(
+           textAlign: TextAlign.right,
           style: TextStyle(color: textColor),
           cursorColor: textColor,
           controller: emailController,
@@ -90,6 +110,7 @@ class _LoginPageViewState extends State<LoginPageView> {
               labelText: "البريد الإلكتروني",
               labelStyle: TextStyle(color: texthint.withOpacity(0.6))
           ),
+            validator: (value)=>validateEmail(value),
         ),
       ),
     );
@@ -106,7 +127,8 @@ class _LoginPageViewState extends State<LoginPageView> {
             SizeConfig.screenWidth!/20.55,
             SizeConfig.screenHeight!/34.15
         ),
-        child: TextField(
+        child: TextFormField(
+          textAlign: TextAlign.right,
           obscureText: passwordObscure,
           style: TextStyle(color: textColor),
           controller:  passwordController,
@@ -137,8 +159,14 @@ class _LoginPageViewState extends State<LoginPageView> {
               hintText: "كلمة السر",
               hintStyle: TextStyle(color: texthint.withOpacity(0.3)),
               labelText: "كلمة السر",
-              labelStyle: TextStyle(color: texthint.withOpacity(0.6))
+              labelStyle: TextStyle(color: texthint.withOpacity(0.6)),
           ),
+           validator: (value) {
+              if (value == null || value.isEmpty ||value.length < 8) {
+                return 'الرجاء إدخال كلمة السر';
+              }
+              return null;
+            },
         ),
       ),
     );
@@ -185,11 +213,14 @@ class _LoginPageViewState extends State<LoginPageView> {
             shadowColor: MaterialStateProperty.all(Colors.transparent),
           ),
           onPressed: () {
-               // print(emailController.text);
-               // print(passwordController.text);
+          
+                 if (_formKey.currentState!.validate()) {
+                  // If the form is valid, display a snackbar. In the real world,
+                 
                     _seConnecter(emailController.text,
                                         passwordController.text);
-               // print(widget.password);
+                                        }
+            
            // Navigator.pushReplacement(
           
                 //context, MaterialPageRoute(builder: (context) => MyHomePage()));

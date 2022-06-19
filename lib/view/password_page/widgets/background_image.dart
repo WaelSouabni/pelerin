@@ -24,7 +24,7 @@ class BackgroundImage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Center(
-                  child: TextTitle(title: " ترك رسالة"),
+                  child: TextTitle(title: "تغيير كلمة المرور"),
                 ),
               ],
             ),

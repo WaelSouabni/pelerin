@@ -27,6 +27,7 @@ class _CheckoutPageViewState extends State<CheckoutPageView> {
   int currentStep = 0;
   bool isCompleted = false;
   late SharedPreferences sharedPreferences;
+   final _formKey = GlobalKey<FormState>();
 
   //
  
@@ -66,8 +67,9 @@ class _CheckoutPageViewState extends State<CheckoutPageView> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-      
-        body: SingleChildScrollView(
+     //   body: SingleChildScrollView(
+      body: Form(//SingleChildScrollView
+          key: _formKey,
         child: Column(
           children: [
           BackgroundImage(),
@@ -88,7 +90,9 @@ isCompleted
                       //print("Completed");
 
                       /// send data to server
+                  
                       ajouterPelerin();
+                  
                     } else {
                       /// code
                     }
